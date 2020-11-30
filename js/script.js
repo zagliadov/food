@@ -184,10 +184,22 @@ const message = {
     failure : 'Что-то пошло не так...'
 };
 forms.forEach( ( item ) => {
-    postData( item );
+    bindPostData( item );
 });
 
-function postData( form ) {
+const postData = async ( url, data ) => {
+    const res = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body: data
+    });
+    return await res.json();
+};
+
+
+function bindPostData( form ) {
     form.addEventListener( 'submit', ( e )  => {
         e.preventDefault();//Убераем перезагрузку по клику на кнопке 
         const statusMessage = document.createElement( 'img' );
@@ -201,19 +213,9 @@ function postData( form ) {
         form.insertAdjacentElement('afterend', statusMessage );
         const formData = new FormData( form ); // во внутрь мы помещаем форму из которой нам нужно собрать данные
         
-        const object = {};
-        formData.forEach( function( value, key ) {
-            object[key] = value;
-        });
+        const json = JSON.stringify( Object.fromEntries( formData.entries ) );
 
-
-        fetch('js/server.php', {
-            method: 'POST',
-            headers: {
-                'Content-type': 'application/json'
-            },
-            body: JSON.stringify(object)
-        }).then( data => data.text)
+        postData('http://localhost:3000/requests', json )
         .then( ( data ) => {
             console.log( data );
             showThanksModal( message.success);
@@ -261,12 +263,34 @@ fetch('http://localhost:3000/menu')
 
 
 
-
-
-
-
-
-
+    // new InputConstructor(
+//     'required',
+//     'Ваш номер телефона',
+//     'phone',
+//     'phone',
+//     'order__input',
+//     '.order__form'
+// ).render();
+    //class InputConstructor {
+        //     constructor( required, placeholder, name, type, className, parentSelector ) {
+        //         this.required       = required;
+        //         this.placeholder    = placeholder;
+        //         this.name           = name;
+        //         this.type           = type;
+        //         this.className      = className;
+        //         this.parent         = document.querySelector( parentSelector );
+        //     }
+        //     render() {
+        //         const input = document.createElement( 'input' );
+        //         input.classList = this.className;
+        //         input.required = this.required;
+        //         input.placeholder = this.placeholder;
+        //         input.name = this.name;
+        //         input.type = this.type;
+        
+        //         this.parent.prepend( input );
+        //     }
+        // }
 
 
 
@@ -491,7 +515,26 @@ new LinkConstructor(
 //     'btn_dark',
 //     'btn_min'
 // ).render();
+const getResource = async ( url ) => {
+    const res = await fetch( url );
 
+    if ( !res.ok ) {
+        throw new Error(`Could not fetch ${url}, status ${res.status}` )
+    }
+
+    return await res.json();
+};
+
+
+
+
+
+getResource('http://localhost:3000/menu')
+    .then( data => {
+        data.forEach( ({img, altimg, title, descr, price}) => {
+            new MenuCard(img, altimg, title, descr, price, '.menu .container').render();
+        })
+    });
 
 class MenuCard {
     constructor( src, alt, title, descr, price, parentSelector, ...clasess ) {
@@ -535,45 +578,43 @@ class MenuCard {
 
 }//MenuCard
 
-new MenuCard(
-    "img/tabs/vegy.jpg",
-    "vegy",
-    'Меню "Фитнес"',
-    `Меню "Фитнес" - это новый подход к приготовлению блюд:
-     больше свежих овощей и фруктов. Продукт активных и здоровых людей.
-     Это абсолютно новый продукт с оптимальной ценой и высоким качеством!`,
-     9,
-    '.menu .container',
-    "menu__item",
-    'big'
-).render();
-
-new MenuCard(
-    "img/tabs/elite.jpg",
-    "elite",
-    'Меню “Премиум”',
-    `В меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!`,
-    15,
-    '.menu .container',
-    "menu__item"
-    
-).render();
-
-new MenuCard(
-    "img/tabs/post.jpg",
-    "post",
-    'Меню "Постное"',
-    `Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков.`,
-    13,
-    '.menu .container',
-    "menu__item"
-    
-).render();
+   
+ 
+class BankGov {
+    constructor( txt, rate, cc, exchangedate, parentSelector ) {
+        this.txt            = txt;
+        this.rate           = rate;
+        this.cc             = cc;
+        this.exchangedate   = exchangedate;
+        this.parent         = document.querySelector( parentSelector );
+    }
+    render() {
+        const div = document.createElement( 'div' );
+        div.innerHTML = `
+            <p>${this.rate}</p>
+            
+            <p>${this.exchangedate}</p>
+        `;
+        this.parent.append( div );
+    }
+}
 
 
+const current = 'USD';
+let dateArr = ['20201010', '20201011', '20201012', '20201013' , '20201014', '20201015', '20201016',
+               '20201017', '20201018', '20201019', '20201020'];
 
-
-
+for ( let date of dateArr) {
+getResource(`https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?date=${date}&json`)
+    .then(data => {
+        data.forEach( ({txt, rate, cc, exchangedate}) => {
+            if ( cc === current ) {
+                new BankGov(txt, rate, cc, exchangedate, '.block' ).render();
+            }
+            
+        })
+    })
+}
 
 
 
