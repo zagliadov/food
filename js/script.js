@@ -1,7 +1,9 @@
 'use strict';
+// const axios = require('axios').default;
 
 window.addEventListener('DOMContentLoaded', () => {
 
+    
     const tabheader     = document.querySelector( '.tabheader__items' ),
           tabcontent    = document.querySelectorAll( '.tabcontent' ),
           tabItem       = document.querySelectorAll( '.tabheader__item' ),
@@ -263,44 +265,6 @@ fetch('http://localhost:3000/menu')
 
 
 
-    // new InputConstructor(
-//     'required',
-//     'Ваш номер телефона',
-//     'phone',
-//     'phone',
-//     'order__input',
-//     '.order__form'
-// ).render();
-    //class InputConstructor {
-        //     constructor( required, placeholder, name, type, className, parentSelector ) {
-        //         this.required       = required;
-        //         this.placeholder    = placeholder;
-        //         this.name           = name;
-        //         this.type           = type;
-        //         this.className      = className;
-        //         this.parent         = document.querySelector( parentSelector );
-        //     }
-        //     render() {
-        //         const input = document.createElement( 'input' );
-        //         input.classList = this.className;
-        //         input.required = this.required;
-        //         input.placeholder = this.placeholder;
-        //         input.name = this.name;
-        //         input.type = this.type;
-        
-        //         this.parent.prepend( input );
-        //     }
-        // }
-
-
-
-
-
-
-
-
-
-
 
 // function getDates(startDate, stopDate) {
 //     var dateArray = [];
@@ -337,204 +301,31 @@ fetch('http://localhost:3000/menu')
 
 
 
+// const getResource = async ( url ) => {
+//     const res = await fetch( url );
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Используем классы для карточек
-
-class LinkConstructor {
-    constructor( href, linkName, parentSelector ) {
-        this.href       = href;
-        this.linkName   = linkName;
-        this.parent     = document.querySelector( parentSelector );
-    }
-    
-    render() {
-        const div = document.createElement( 'div' );
-        div.innerHTML = `
-            <a href=${this.href} class="header__link">${this.linkName}</a>
-        `;
-        this.parent.append(div);
-    }
-    
-}//LinkConstructor
-new LinkConstructor(
-    '#',
-    'Второй пункт',
-    '.header__links'
-).render();
-
-
-new LinkConstructor(
-    '#',
-    'Доставка питания',
-    '.header__links'
-).render();
-
-new LinkConstructor(
-    'https://learn.javascript.ru/introduction-browser-events',
-    'Введение в браузерные события',
-    '.header__links'
-).render();
-
-// class TitleConstructor {
-//     constructor( className, title, parentSelector ) {
-//         this.className      = className;
-//         this.title          = title;
-//         this.parent         = document.querySelector( parentSelector );
+//     if ( !res.ok ) {
+//         throw new Error(`Could not fetch ${url}, status ${res.status}` )
 //     }
-//     render() {
-//         const div = document.createElement( 'div' );
-//         div.classList.add( this.className );
-//         div.innerHTML = `
-//             ${this.title}
-//         `;
-//        this.parent.append( div ); 
-//     }
-// }
-// new TitleConstructor(
-//     'title',
-//     'Заказывай пробный день прямо сейчас!',
-//     '.order'
-// ).render();
 
-// class FormConstructor {
-//     constructor(action, className, parentSelctor ) {
-//         this.action     = action;
-//         this.className  = className;
-//         this.parent     = document.querySelector( parentSelctor );        
-//     }
-//     render() {
-//         const form = document.createElement( 'form' );
-//         form.action = this.action;
-//         form.classList.add( this.className );
-//         this.parent.append( form );
-//     }
-// }
-
-// new FormConstructor(
-//     '#',
-//     'order__form',
-//     '.order'
-// ).render();
+//     return await res.json();
+// };
 
 
 
-// class InputConstructor {
-//     constructor( required, placeholder, name, type, className, parentSelector ) {
-//         this.required       = required;
-//         this.placeholder    = placeholder;
-//         this.name           = name;
-//         this.type           = type;
-//         this.className      = className;
-//         this.parent         = document.querySelector( parentSelector );
-//     }
-//     render() {
-//         const input = document.createElement( 'input' );
-//         input.classList = this.className;
-//         input.required = this.required;
-//         input.placeholder = this.placeholder;
-//         input.name = this.name;
-//         input.type = this.type;
+// getResource('http://localhost:3000/menu')
+//     .then( data => {
+//         data.forEach( ({img, altimg, title, descr, price}) => {
+//             new MenuCard(img, altimg, title, descr, price, '.menu .container').render();
+//         })
+//     });
 
-//         this.parent.prepend( input );
-//     }
-// }
-
-// new InputConstructor(
-//     'required',
-//     'Ваш номер телефона',
-//     'phone',
-//     'phone',
-//     'order__input',
-//     '.order__form'
-// ).render();
-
-// new InputConstructor(
-//     'required',
-//     'Ваше имя',
-//     'name',
-//     'text',
-//     'order__input',
-//     '.order__form'
-// ).render();
-
-
-// class ImgConstructor {
-//     constructor(src, alt, parentSelector) {
-//         this.src    = src;
-//         this.alt    = alt;
-//         this.parent = document.querySelector( parentSelector );
-//     }
-//     render() {
-//         const img = document.createElement( 'img' );
-//         img.src = this.src;
-//         img.alt = this.alt;
-
-//         this.parent.append( img );
-//     }
-// }
-// new ImgConstructor(
-//     'icons/right.svg',
-//     'right',
-//     '.order__form'
-
-// ).render();
-
-// class ButtonConstructor {
-//     constructor( title, parentSelector, ...clasess ) {
-//         this.clasess    = clasess;
-//         this.title      = title;
-//         this.parent     = document.querySelector( parentSelector );
-//     }
-//     render() {
-//         const button = document.createElement( 'button' );
-//         this.clasess.forEach( ( className ) => {
-//             button.classList.add(className);
-//         });
-//         button.innerHTML = `${this.title}`;
-
-//         this.parent.append( button );
-//     }
-// }
-// new ButtonConstructor(
-//     'Перезвонить мне',
-//     '.order__form',
-//     'btn',
-//     'btn_dark',
-//     'btn_min'
-// ).render();
-const getResource = async ( url ) => {
-    const res = await fetch( url );
-
-    if ( !res.ok ) {
-        throw new Error(`Could not fetch ${url}, status ${res.status}` )
-    }
-
-    return await res.json();
-};
-
-
-
-
-
-getResource('http://localhost:3000/menu')
-    .then( data => {
-        data.forEach( ({img, altimg, title, descr, price}) => {
+axios.get('http://localhost:3000/menu')
+    .then( ( data ) => {
+        data.data.forEach( ({img, altimg, title, descr, price}) => {
             new MenuCard(img, altimg, title, descr, price, '.menu .container').render();
         })
-    });
+    })
 
 class MenuCard {
     constructor( src, alt, title, descr, price, parentSelector, ...clasess ) {
@@ -600,28 +391,212 @@ class BankGov {
 }
 
 
+
 const current = 'USD';
 let dateArr = ['20201010', '20201011', '20201012', '20201013' , '20201014', '20201015', '20201016',
                '20201017', '20201018', '20201019', '20201020'];
 
+
 for ( let date of dateArr) {
-getResource(`https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?date=${date}&json`)
+axios.get(`https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?date=${date}&json`)
     .then(data => {
-        data.forEach( ({txt, rate, cc, exchangedate}) => {
+        data.data.forEach( ({txt, rate, cc, exchangedate}) => {
             if ( cc === current ) {
                 new BankGov(txt, rate, cc, exchangedate, '.block' ).render();
             }
-            
         })
     })
+} 
+
+
+
+
+
+
+
+
+const slides          = document.querySelectorAll('.offer__slide'),
+      slider          = document.querySelector('.offer__slider'),
+      prev            = document.querySelector('.offer__slider-prev'),
+      next            = document.querySelector('.offer__slider-next'),
+      sliderCurrent   = document.querySelector('#current'),
+      sliderTotal     = document.querySelector('#total'),
+      slidesWrapper   = document.querySelector('.offer__slider-wrapper'),
+      slidesField     = document.querySelector('.offer__slider-inner'),
+      width           = window.getComputedStyle(slidesWrapper).width;
+
+    slidesField.style.width = 100 * slides.length + '%';
+    slides.forEach( ( slide ) => {
+        slide.style.width = width;
+    });
+
+    slider.style.position = 'relative';
+    
+    const indicators = document.createElement( 'ol' ),
+          dots = [];
+    indicators.classList.add('carousel-indicators');
+    indicators.style.cssText = `
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 15;
+        display: flex;
+        justify-content: center;
+        margin-right: 15%;
+        margin-left: 15%;
+        list-style: none;
+    `;
+    slider.append(indicators);
+
+    for ( let i = 0; i < slides.length; i++ ) {
+        const dot = document.createElement( 'li' );
+        dot.setAttribute( 'data-slide-to', i + 1);
+        dot.style.cssText = `
+            box-sizing: content-box;
+            flex: 0 1 auto;
+            width: 30px;
+            height: 6px;
+            margin-right: 3px;
+            margin-left: 3px;
+            cursor: pointer;
+            background-color: #fff;
+            background-clip: padding-box;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            opacity: .5;
+            transition: opacity .6s ease;
+        `;
+        if ( i == 0 ) {
+            dot.style.opacity = 1;
+        }
+        indicators.append(dot);
+        dots.push(dot);
+
+    }
+
+
+    slidesField.style.display = 'flex';
+    slidesField.style.transition = '0.5s all';
+    slidesWrapper.style.overflow = 'hidden';
+
+let slideIndex = 1;
+let offset = 0;
+
+next.addEventListener( 'click', () => {
+    if ( offset == +width.slice(0, width.length - 2 ) * (slides.length - 1)) {
+        offset = 0;
+    } else {
+         offset += +width.slice(0, width.length - 2 );
+    }
+    slidesField.style.transform = `translateX(-${offset}px)`;
+    if( slideIndex == slides.length ) {
+        slideIndex = 1;
+    } else {
+        slideIndex++;
+    }
+
+    if( slides.length < 10 ) {
+        sliderCurrent.textContent = `0${slideIndex}`
+    } else {
+        sliderCurrent.textContent = slideIndex;
+    }
+
+    dots.forEach( ( dot ) => {
+        dot.style.opacity = '.5';
+    });
+    dots[slideIndex - 1].style.opacity = 1;
+});
+
+prev.addEventListener( 'click', () => {
+    if ( offset == 0) {
+        offset = +width.slice(0, width.length - 2 ) * (slides.length - 1);
+    } else {
+         offset -= +width.slice(0, width.length - 2 );
+    }
+    slidesField.style.transform = `translateX(-${offset}px)`;
+
+    if ( slideIndex == 1 ) {
+        slideIndex = slides.length;
+    } else {
+        slideIndex--;
+    }
+
+    if ( slides.length < 10 ) {
+        sliderCurrent.textContent = `0${slideIndex}`;
+    } else {
+        sliderCurrent.textContent = slideIndex;
+    }
+
+    dots.forEach( ( dot ) => {
+        dot.style.opacity = '.5';
+    });
+    dots[slideIndex - 1].style.opacity = 1;
+})
+
+dots.forEach( ( dot ) => {
+    dot.addEventListener( 'click', ( e ) => {
+        const slideTo = e.target.getAttribute( 'data-slide-to' );
+
+        slideIndex = slideTo;
+        offset =  +width.slice(0, width.length - 2 ) * (slideTo - 1);
+
+        slidesField.style.transform = `translateX(-${offset}px)`;
+        
+        if ( slides.length < 10 ) {
+            sliderCurrent.textContent = `0${slideIndex}`;
+        } else {
+            sliderCurrent.textContent = slideIndex;
+        }
+
+        dots.forEach( ( dot ) => {
+            dot.style.opacity = '.5';
+        });
+        dots[slideIndex - 1].style.opacity = 1;
+        
+    })
+})
+
+
+if ( slides.length < 10 ) {
+    sliderTotal.textContent = `0${slides.length}`;
+    sliderCurrent.textContent = `0${slideIndex}`;
+} else {
+    sliderTotal.textContent = slides.length;
+    sliderCurrent.textContent = slideIndex;
 }
 
 
+// let showSlides = ( n ) => {
+//     if ( n > slides.length ) {
+//         slideIndex = 1
+//     }
+//     if ( n < 1 ) {
+//         slideIndex = slides.length;
+//     }
 
+//     slides.forEach( item => item.style.display = 'none');
+//     slides[slideIndex - 1].style.display = 'block';
 
+//     if ( slides.length < 10 ) {
+//         sliderCurrent.textContent = `0${slideIndex}`;
+//     } else {
+//         sliderCurrent.textContent = slideIndex;
+//     }
+    
+// }
 
+// let plusSlides = (n) => {
+//     showSlides( slideIndex +=n );
+// }
+// next.addEventListener( 'click', () => {
+//     plusSlides(1)
+// });
+// prev.addEventListener( 'click', () => {
+//     plusSlides(-1)
+// });
 
-
+// showSlides(slideIndex)
 
 
 

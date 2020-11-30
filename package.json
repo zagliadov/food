@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "script.js",
   "dependencies": {
+    "axios": "^0.21.0",
     "moment": "^2.29.1"
   },
   "devDependencies": {
