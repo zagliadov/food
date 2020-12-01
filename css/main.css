@@ -7,4 +7,12 @@
     padding-left: 100px;
 }
 
+.form {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+}
 
+.form label {
+    font-size: 30px;
+}
